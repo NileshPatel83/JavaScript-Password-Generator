@@ -1,12 +1,8 @@
 //Constant global variables.
 const minLength = 8;
 const maxLength = 128;
-const lowercaseLowerLimit = 97;
-const lowercaseUpperLimit = 122;
-const uppercaseLowerLimit = 65;
-const uppercaseUpperLimit = 90;
-const numberLowerLimit = 48;
-const numberUpperLimit = 57;
+const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+const numberChars ="0123456789";
 const specialChars = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 
 //Selects generate password button.
@@ -58,22 +54,17 @@ function getCharacterSet(charTypes){
 
   //Gets lowercase character array if user selects lowercase character type and adds to character set.
   if(charTypes.includeLowercase){
-    var lowercaseChars = getCharacterArray(lowercaseLowerLimit, lowercaseUpperLimit);
-    charSet = charSet.concat(lowercaseChars);
+    charSet = charSet.concat(lowercaseChars.split(""));
   }
 
-  //Gets uppercase character array if user selects uppercase character type and adds to character set.
+  //Gets uppercase character array by converting lowercase string to upper case if user selects uppercase character type and adds to character set.
   if(charTypes.includeUppercase){
-    var uppercaseChars = getCharacterArray(uppercaseLowerLimit, uppercaseUpperLimit);
-    charSet = charSet.concat(uppercaseChars);
-    
+    charSet = charSet.concat(lowercaseChars.toUpperCase().split(""));
   }
 
   //Gets numeric character array if user selects numeric character type and adds to character set.
   if(charTypes.includeNumbers){
-    var numberChars = getCharacterArray(numberLowerLimit, numberUpperLimit);
-    charSet = charSet.concat(numberChars);
-    
+    charSet = charSet.concat(numberChars.split(""));
   }
 
   //If user selects special character type, converts special character string to a character array and adds to character set.
@@ -82,19 +73,6 @@ function getCharacterSet(charTypes){
   }
 
   return charSet;
-}
-
-//Gets the character array based on specified lower and upper limits.
-function getCharacterArray(lowerLimit, upperLimit){
-
-  var charArray= [];
-
-  //Loops through lower and upper limits and generates the character array.
-  for(var i = lowerLimit; i<= upperLimit; i++){
-    charArray.push(String.fromCharCode(i));
-  }
-
-  return charArray;
 }
 
 //Gets user selected character types for password.
