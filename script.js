@@ -12,6 +12,8 @@ var generateBtn = document.querySelector("#generate");
 generateBtn.addEventListener("click", writePassword);
 
 function writePassword() {
+
+  //Generates the password based on user criteria.
   var password = generatePassword();
   if(password == null) return;
 
@@ -22,6 +24,7 @@ function writePassword() {
   passwordText.value = password;
 }
 
+//Generates the password based on user criteria.
 function generatePassword(){
 
   //Gets user entered password length.
