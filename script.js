@@ -1,6 +1,10 @@
-//Global variables.
+//Constant global variables.
 const minLength = 8;
 const maxLength = 128;
+const lowercaseLowerLimit = 97;
+const lowercaseUpperLimit = 122;
+const uppercaseLowerLimit = 65;
+const uppercaseUpperLimit = 90;
 
 //Selects generate password button.
 var generateBtn = document.querySelector("#generate");
@@ -29,14 +33,41 @@ function generatePassword(){
   var charTypes = getSelectedCharacterTypes();
   if(charTypes == null) return null;
 
+  var charSet = getCharacterSet(charTypes);
+  if(charSet == null) return null;
 
 
 
 
 
 
+}
 
-  
+function getCharacterSet(charTypes){
+  var charSet = [];
+
+  //Gets lowercase character array if user selects lowercase character type.
+  if(charTypes.includeLowercase){
+    var lowercaseChars = getCharacterArray(lowercaseLowerLimit, lowercaseUpperLimit);
+    charSet.push(lowercaseChars);
+  }
+
+  console.log(charSet);
+
+
+}
+
+//Gets the character array based on specified lower and upper limits.
+function getCharacterArray(lowerLimit, upperLimit){
+
+  var charArray= [];
+
+  //Loops through lower and upper limits and generates the character array.
+  for(var i = lowerLimit; i<= upperLimit; i++){
+    charArray.push(String.fromCharCode(i));
+  }
+
+  return charArray;
 }
 
 //Gets user selected character types for password.
