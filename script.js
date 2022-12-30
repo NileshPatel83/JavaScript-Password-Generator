@@ -5,6 +5,9 @@ const lowercaseLowerLimit = 97;
 const lowercaseUpperLimit = 122;
 const uppercaseLowerLimit = 65;
 const uppercaseUpperLimit = 90;
+const numberLowerLimit = 48;
+const numberUpperLimit = 57;
+const specialChars = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 
 //Selects generate password button.
 var generateBtn = document.querySelector("#generate");
@@ -16,10 +19,10 @@ function writePassword() {
   var password = generatePassword();
   if(password == null) return;
 
-  //Selects password display textbox.
+  //Selects password display text area.
   var passwordText = document.querySelector("#password");
 
-  //Sets the text of password display textbox to generated password.
+  //Sets the text of password display text area to generated password.
   passwordText.value = password;
 }
 
@@ -33,28 +36,52 @@ function generatePassword(){
   var charTypes = getSelectedCharacterTypes();
   if(charTypes == null) return null;
 
+  //Gets character set array based on user selected character types.
   var charSet = getCharacterSet(charTypes);
-  if(charSet == null) return null;
+  if(charSet.length == 0) return null;
 
+  //Initialize an empty password arrray.
+  var password = [];
 
-
-
-
-
+  //Generates one random character each time from character set and pushes it to password array until the password length is reached.
+  for(var i = 0; i< passwordLength; i++){
+    password.push(charSet[Math.floor(Math.random() * charSet.length)]);
+  }
+  
+  //Returns the password as a string.
+  return password.join("");
 }
 
+//Gets character set array based on user selected character types.
 function getCharacterSet(charTypes){
   var charSet = [];
 
-  //Gets lowercase character array if user selects lowercase character type.
+  //Gets lowercase character array if user selects lowercase character type and adds to character set.
   if(charTypes.includeLowercase){
     var lowercaseChars = getCharacterArray(lowercaseLowerLimit, lowercaseUpperLimit);
-    charSet.push(lowercaseChars);
+    charSet = charSet.concat(lowercaseChars);
   }
 
-  console.log(charSet);
+  //Gets uppercase character array if user selects uppercase character type and adds to character set.
+  if(charTypes.includeUppercase){
+    var uppercaseChars = getCharacterArray(uppercaseLowerLimit, uppercaseUpperLimit);
+    charSet = charSet.concat(uppercaseChars);
+    
+  }
 
+  //Gets numeric character array if user selects numeric character type and adds to character set.
+  if(charTypes.includeNumbers){
+    var numberChars = getCharacterArray(numberLowerLimit, numberUpperLimit);
+    charSet = charSet.concat(numberChars);
+    
+  }
 
+  //If user selects special character type, converts special character string to a character array and adds to character set.
+  if(charTypes.includeSpecialChars){
+    charSet = charSet.concat(specialChars.split(""));
+  }
+
+  return charSet;
 }
 
 //Gets the character array based on specified lower and upper limits.
