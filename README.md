@@ -11,7 +11,7 @@ Presents series of promts for password criteria as follows:
 - Displays the generated password in password text area. 
 
 ## Deployment
-The webpage is deployed to GitHub pages. Use below link to visit the webpage: https://nileshpatel83.github.io/portfolio/
+The webpage is deployed to GitHub pages. Use below link to visit the webpage: https://nileshpatel83.github.io/JavaScript-Password-Generator/
 
 ## Screenshot
 ![Password Generator Webpage](./assets/images/password-generator.png)
