@@ -88,9 +88,9 @@ function getSelectedCharacterTypes(){
   };
 
   //Prompts the user to select character types for password.
-  charTypes.includeLowercase = window.confirm("Would you like to include lower case letters?");
-  charTypes.includeUppercase = window.confirm("Would you like to include upper case letters?");
-  charTypes.includeNumbers = window.confirm("Would you like to include numbers?");
+  charTypes.includeLowercase = window.confirm("Would you like to include lower case characters?");
+  charTypes.includeUppercase = window.confirm("Would you like to include upper case characters?");
+  charTypes.includeNumbers = window.confirm("Would you like to include numeric characters?");
   charTypes.includeSpecialChars = window.confirm("Would you like to include special characters?");  
 
   //Checks if user has selected at least one character type or not. Displays an error message otherwise.
